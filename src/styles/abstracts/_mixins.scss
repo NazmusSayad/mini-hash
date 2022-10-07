@@ -1,0 +1,23 @@
+@use './variables' as *;
+
+@mixin input {
+  width: 100%;
+  background: $gray-800;
+  border: none;
+  outline: none;
+  padding: $sm;
+  border-radius: $radius;
+
+  &::placeholder {
+    color: $placeholder;
+  }
+
+  &:focus {
+    outline: 2px solid hsl(var(--accent));
+  }
+}
+
+@mixin flex {
+  display: flex;
+  gap: $sm;
+}

@@ -1,0 +1,22 @@
+{
+  "type": "module",
+  "scripts": {
+    "start": "concurrently npm:watch:* npm:serve",
+    "watch": "concurrently npm:watch:*",
+    "build": "concurrently npm:build:*",
+    "serve": "live-server public --ignorePattern=.*\\.scss",
+    "build:js": "esbuild src/script/index.js --outdir=public/dist --bundle --minify --target=es6",
+    "build:sass": "sass src/styles/index.scss public/dist/index.css --no-source-map",
+    "watch:js": "esbuild src/script/index.js --outdir=public/dist --bundle --watch",
+    "watch:sass": "sass src/styles/index.scss public/dist/index.css -w"
+  },
+  "devDependencies": {
+    "@types/node": "^18.7.18",
+    "concurrently": "latest",
+    "esbuild": "latest",
+    "sass": "latest"
+  },
+  "dependencies": {
+    "axios": "^0.27.2"
+  }
+}

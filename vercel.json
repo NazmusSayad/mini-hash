@@ -1,0 +1,9 @@
+{
+  "outputDirectory": "public",
+  "routes": [
+    { "src": "/api/encode", "methods": ["POST"], "dest": "/api/encode.ts" },
+    { "src": "/api/decode", "methods": ["POST"], "dest": "/api/decode.ts" },
+    { "src": "/api/attack", "methods": ["POST"], "dest": "/api/attack.ts" },
+    { "src": "/api(/.*?)?", "dest": "/api/404.ts" }
+  ]
+}

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Goriber Hash</title>
+    <link rel="stylesheet" href="/dist/index.css" />
+    <script src="/dist/index.js" type="module"></script>
+  </head>
+
+  <body>
+    <div class="container">
+      <header>
+        <h1>Mode</h1>
+        <div>
+          <input class="checkbox" id="toggle" type="checkbox" />
+          <label
+            for="toggle"
+            class="label"
+            data-label="Encrypt"
+            data-label-checked="Decrypt"
+            tabindex="1"
+          >
+          </label>
+        </div>
+      </header>
+
+      <form id="form">
+        <textarea
+          placeholder="Input here..."
+          name="input"
+          class="input"
+          rows="10"
+          required
+        ></textarea>
+
+        <div class="group">
+          <input
+            type="number"
+            name="salt"
+            class="salt"
+            placeholder="Salt..."
+            min="0"
+            maxlength="12"
+          />
+
+          <button type="submit">Submit</button>
+        </div>
+
+        <div class="output" id="output">
+          <button type="button" id="copy">Copy</button>
+          <div class="text"></div>
+        </div>
+      </form>
+    </div>
+  </body>
+</html>

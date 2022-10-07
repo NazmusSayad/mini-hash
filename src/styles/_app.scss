@@ -1,0 +1,187 @@
+@use './abstracts/variables' as *;
+@use './abstracts/mixins' as *;
+
+:root {
+  --accent: 354, 72%, 51%;
+}
+
+::selection {
+  background: hsl(var(--accent));
+}
+
+html {
+  scroll-behavior: smooth;
+  color-scheme: dark;
+  caret-color: hsl(var(--accent));
+  user-select: none;
+
+  &:has(header .checkbox:checked) {
+    --accent: 133, 72%, 51%;
+  }
+}
+
+body {
+  font-family: sans-serif;
+}
+
+.container {
+  width: min(100%, 560px);
+  margin-inline: auto;
+  padding-inline: $md;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-block: $xl;
+  user-select: none;
+
+  .label {
+    width: calc($lg * 1.7);
+    height: $lg;
+    border-radius: 200vw;
+    position: relative;
+    outline: none;
+    display: inline-block;
+    background: hsl(var(--accent));
+    cursor: pointer;
+
+    &::before {
+      transition: all 0.2s ease;
+      content: '';
+      position: absolute;
+      right: 0;
+      transform: translateX(0);
+      top: 0;
+      width: $lg;
+      height: $lg;
+      border: 2px solid hsl(var(--accent));
+      border-radius: 200vw;
+      background: $white;
+    }
+
+    &::after {
+      content: attr(data-label);
+      position: absolute;
+      right: calc(100% + $sm);
+      font-weight: bold;
+      line-height: $lg;
+    }
+  }
+
+  .checkbox {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+
+    &:focus-visible + .label::before {
+      outline: 4px solid rgb($white, 0.7);
+      outline-offset: 2px;
+    }
+
+    &:checked + .label {
+      &::after {
+        content: attr(data-label-checked);
+      }
+
+      &::before {
+        right: 100%;
+        transform: translateX(100%);
+      }
+    }
+  }
+}
+
+form {
+  background: $gray-900;
+  padding: $lg;
+  border-radius: $radius;
+  @include flex;
+  flex-direction: column;
+
+  textarea.input {
+    resize: none;
+    @include input;
+  }
+
+  .group {
+    @include flex;
+
+    input.salt {
+      @include input;
+    }
+
+    button {
+      font-size: $xs;
+      font-weight: bold;
+      border-radius: $radius;
+      background: hsl(var(--accent));
+      border: 0;
+      outline: 0;
+      padding: $xs $lg;
+
+      &:focus-visible {
+        outline: 2px solid hsl(var(--accent));
+        outline-offset: 3px;
+      }
+
+      &:hover {
+        background: hsla(var(--accent), 0.9);
+      }
+      &:active {
+        background: hsla(var(--accent), 0.8);
+      }
+    }
+  }
+
+  .output {
+    @include input;
+    min-height: 10rem;
+    position: relative;
+
+    &:hover button {
+      opacity: 1;
+    }
+
+    .text {
+      word-break: break-all;
+      word-wrap: wrap;
+      user-select: all;
+    }
+
+    button {
+      transition: 0.2s ease;
+      position: absolute;
+      top: 0;
+      right: 0;
+      opacity: 0;
+      margin: $xs;
+
+      @media (pointer: coarse) {
+        position: static;
+        opacity: 1;
+        margin: 0 0 0.35rem 0.5rem;
+        float: right;
+      }
+
+      font-size: 1.2rem;
+      padding: 0.6rem;
+      outline: 0;
+      border-radius: 0.5rem;
+      border: 1px solid hsl(var(--accent));
+      background: lighten($black, 10);
+
+      &:hover {
+        background: lighten($black, 20);
+      }
+      &:active {
+        background: lighten($black, 15);
+      }
+
+      &.copied {
+        background: hsl(var(--accent));
+      }
+    }
+  }
+}
